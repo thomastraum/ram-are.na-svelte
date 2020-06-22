@@ -1,4 +1,7 @@
 <script>
+
+import { Spinner } from 'sveltestrap';
+
 import {getQueryString} from './helpers.js';
 import PostImage        from './posts/PostImage.svelte';
 import PostMarkdown     from './posts/PostMarkdown.svelte';
@@ -17,7 +20,7 @@ const params = {
 let posts = getPosts();
 
 async function getPosts() {
-  const url = `http://api.are.na/v2/channels/${channelslug}/contents?${getQueryString(params)}`
+  const url = `https://api.are.na/v2/channels/${channelslug}/contents?${getQueryString(params)}`
   const res = await fetch(url)
   const posts = await res.json();
   console.log(posts)
@@ -29,7 +32,7 @@ async function getPosts() {
 <style></style>
 
   {#await posts}
-    loading...
+    <Spinner />
   {:then data}
   <div class="d-flex flex-column justify-content-center">
     {#each data.contents as post, index }
