@@ -1,39 +1,35 @@
 <script>
-  export let post;
 
-  import {getQueryString} from '../helpers.js';
+import {getQueryString} from '../helpers.js';
+import { onMount } from 'svelte';
 
-  let twitterEmbed  = getOembedTwitter();
+export let post;
+let tweetDiv;
 
-  async function getOembedTwitter() {
-    console.log(post.source.url);
-    const url = `https://publish.twitter.com/oembed?${getQueryString({url:post.source.url})} `
-    console.log(url);
-    const res = await fetch(url);
-    console.log(res);
-    return res.html;
-  }
+const initializeTwittr = () => {
+  // "https://twitter.com/hundredrabbits/status/1270006618118209536"
+  const id = post.source.url.split('/').pop();
+  twttr.widgets.createTweet(
+    id,
+    tweetDiv,
+    {
+      // theme: "dark"
+    }
+  );
+}
 
 </script>
 
+<svelte:head>
+	<script src="https://platform.twitter.com/widgets.js" on:load={initializeTwittr} ></script>
+</svelte:head>
+
 <style>
+  .post-image {
+    float: left;
+  }
+  .blockquote {
 
-.post-image {
-  float: left;
-}
-
-.blockquote {
-
-}
-
+  }
 </style>
-asdasdas
-
-<!-- <div class="post my-5"> -->
-{#await twitterEmbed}
-  ...loading
-{:then value}
-  {value}
-{/await}
-
-<!-- </div> -->
+<div bind:this={tweetDiv}></div>
