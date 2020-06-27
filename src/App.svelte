@@ -19,7 +19,7 @@
 	    </div>
 	</header>
 
-	<div class="container">
+	<div class="container p-5">
 		<Posts />
 	</div>
 </main>
