@@ -16,7 +16,7 @@ const params = {
   page: 0,
   direction: "desc",
   sort: "position",
-  per: 2,
+  per: 20,
 }
 
 let posts = [];
