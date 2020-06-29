@@ -1,5 +1,13 @@
 <script>
-	import Posts from  './Posts.svelte'
+
+  import { Router, Route } from "svelte-routing";
+	import NavLink from "./components/NavLink.svelte";
+
+  import About from "./About.svelte";
+	import Posts from  './Posts.svelte';
+	import Post from  './Post.svelte';
+
+	export let url = "";
 </script>
 
 <style>
@@ -19,7 +27,16 @@
 	    </div>
 	</header>
 
-	<div class="container p-5">
-		<Posts />
-	</div>
+	<Router url="{url}">
+	  <nav>
+	    <NavLink to="/">Home</NavLink>
+	    <NavLink to="about">About</NavLink>
+	  </nav>
+	  <div>
+	    <Route path="/about" component="{About}" />
+	    <Route path="/" component="{Posts}" />
+			<Route path="/post/:id" component="{Post}" />
+	  </div>
+	</Router>
+
 </main>

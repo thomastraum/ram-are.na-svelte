@@ -1,5 +1,7 @@
 <script>
 
+import { Link } from "svelte-routing";
+
 import { Spinner } from 'sveltestrap';
 import { Button } from "sveltestrap";
 
@@ -25,6 +27,7 @@ let postsContainer;
 async function nextPage(){
   params.page++;
   const newPosts = await getPosts();
+  console.log(newPosts);
   posts = [...posts, ...newPosts]; //posts.push(newPosts);
 };
 
@@ -32,7 +35,7 @@ async function getPosts() {
   const url = `https://api.are.na/v2/channels/${channelslug}/contents?${getQueryString(params)}`
   const res = await fetch(url);
   const json = await res.json();
-  // console.log(posts)
+  console.log(res);
   return json.contents;
 }
 
@@ -46,32 +49,27 @@ nextPage();
 
 <style></style>
 
-<div class="d-flex flex-column justify-content-center" bind:this={postsContainer}>
-  {#each posts as post, index }
-  <div class="pb-5 border-1">
-    {#if post.class == "Image"}
-      <PostImage {post} />
-    {:else if post.class == "Text" }
-      <h1 class="my-4">{@html post.title}</h1>
-      <hr />
-      <PostMarkdown {post} />
-    {:else if post.class == "Media" }
-      <h1 class="my-4">{@html post.title}</h1>
-      <hr />
-      <PostMedia {post} />
-    {:else if post.class == "Link" }
-      <h1 class="my-4">{@html post.title}</h1>
-      <hr />
-      <PostLink {post} />
-    {:else}
-      <h1 class="my-4">{@html post.title}</h1>
-      <hr />
-      {@html post.title}
-      {@html post.content_html}
-    {/if}
-    </div>
-  {/each}
+<div class="container px-5">
+  <div class="d-flex flex-column justify-content-center" bind:this={postsContainer}>
+    {#each posts as post, index }
+    <div class="pb-5">
+      <!-- <a href="/block/{post.id}">link</a> -->
+      <h1 class="my-4"><Link to="/post/{post.id}">{@html post.title}</Link></h1>
+      {#if post.class == "Image"}
+        <PostImage {post} />
+      {:else if post.class == "Text" }
+        <PostMarkdown {post} />
+      {:else if post.class == "Media" }
+        <PostMedia {post} />
+      {:else if post.class == "Link" }
+        <PostLink {post} />
+      {:else}
+        {@html post.content_html}
+      {/if}
+      </div>
+    {/each}
+  </div>
+  <Button on:click={nextPage}>
+    load more
+  </Button>
 </div>
-<Button on:click={nextPage}>
-  load more
-</Button>
