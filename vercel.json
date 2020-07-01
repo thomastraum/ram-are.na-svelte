@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/about", "permanent": true, "destination": "/about" },
+    { "source": "/post/:id", "permanent": true, "destination": "/post/:id" }
+  ]
+}

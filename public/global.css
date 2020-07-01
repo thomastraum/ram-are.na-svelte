@@ -6,6 +6,11 @@ html {
   font-weight: 600;
 }
 
+.navbar {
+  /* font-size: 0.1rem !important; */
+  background-color: #000 !important;
+}
+
 .intro-header {
 	background-color: #000;
   margin-bottom: 50px;

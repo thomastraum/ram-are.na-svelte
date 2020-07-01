@@ -4,6 +4,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import copy from 'rollup-plugin-copy';
+import autoPreprocess from 'svelte-preprocess';
+import { scss, postcss } from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -18,10 +20,10 @@ export default {
 	plugins: [
 
 		copy({
-				targets: [{
-						src: 'node_modules/bootstrap/dist/**/*',
-						dest: 'public/vendor/bootstrap'
-				}]
+				// targets: [{
+				// 		src: 'node_modules/bootstrap/dist/**/*',
+				// 		dest: 'public/vendor/bootstrap'
+				// }]
 		}),
 
 		svelte({
@@ -31,7 +33,12 @@ export default {
 			// a separate file - better for performance
 			css: css => {
 				css.write('public/build/bundle.css');
-			}
+			},
+			preprocess: autoPreprocess({
+		    scss: { includePaths: ['src', 'node_modules'] },
+				postcss: { plugins: [ require('autoprefixer'),]}
+			}),
+
 		}),
 
 		// If you have external dependencies installed from
