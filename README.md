@@ -1,19 +1,7 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
----
+# Are.na + Svelte Demo
 
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+connects to an are.na channel and displays the posts
 
 
 ## Get started
@@ -21,7 +9,6 @@ cd svelte-app
 Install the dependencies...
 
 ```bash
-cd svelte-app
 npm install
 ```
 
@@ -73,23 +60,6 @@ Then, from within your project folder:
 ```bash
 cd public
 now deploy --name my-project
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
 ```
 
 # ram-are.na-svelte
