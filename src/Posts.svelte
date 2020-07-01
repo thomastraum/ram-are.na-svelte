@@ -18,11 +18,12 @@ const params = {
   page: 0,
   direction: "desc",
   sort: "position",
-  per: 20,
+  per: 10,
 }
 
 let posts = [];
 let postsContainer;
+let loading;
 
 async function nextPage(){
   params.page++;
@@ -32,10 +33,12 @@ async function nextPage(){
 };
 
 async function getPosts() {
+  loading = true;
   const url = `https://api.are.na/v2/channels/${channelslug}/contents?${getQueryString(params)}`
   const res = await fetch(url);
   const json = await res.json();
   console.log(res);
+  loading = false;
   return json.contents;
 }
 
@@ -49,27 +52,34 @@ nextPage();
 
 <style></style>
 
-<div class="container px-5">
-  <div class="d-flex flex-column justify-content-center" bind:this={postsContainer}>
-    {#each posts as post, index }
-    <div class="pb-5">
-      <!-- <a href="/block/{post.id}">link</a> -->
+{#if loading}
+  <Spinner />
+{/if}
+<div class="d-flex flex-column justify-content-center" bind:this={postsContainer} >
+  {#each posts as post, index }
+  <div class="pb-5">
+    {#if post.class != "Image"}
       <h1 class="my-4"><Link to="/post/{post.id}">{@html post.title}</Link></h1>
-      {#if post.class == "Image"}
-        <PostImage {post} />
-      {:else if post.class == "Text" }
-        <PostMarkdown {post} />
-      {:else if post.class == "Media" }
-        <PostMedia {post} />
-      {:else if post.class == "Link" }
-        <PostLink {post} />
-      {:else}
-        {@html post.content_html}
-      {/if}
-      </div>
-    {/each}
-  </div>
-  <Button on:click={nextPage}>
-    load more
-  </Button>
+    {/if}
+    {#if post.class == "Image"}
+      <PostImage {post} />
+    {:else if post.class == "Text" }
+      <PostMarkdown {post} />
+    {:else if post.class == "Media" }
+      <PostMedia {post} />
+    {:else if post.class == "Link" }
+      <PostLink {post} />
+    {:else}
+      {@html post.content_html}
+    {/if}
+      <hr>
+    </div>
+  {/each}
 </div>
+{#if !loading }
+<Button on:click={nextPage}>
+  load more
+</Button>
+{:else if loading && posts.length != 0 }
+  <Spinner />
+{/if}

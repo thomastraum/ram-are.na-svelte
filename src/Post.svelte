@@ -1,7 +1,6 @@
 <script>
 
 import { Spinner } from 'sveltestrap';
-import { Container } from 'sveltestrap';
 import { Button } from "sveltestrap";
 
 import PostImage        from './posts/PostImage.svelte';
@@ -28,7 +27,6 @@ async function getPost(id) {
 
 <style></style>
 
-<Container>
   <div class="d-flex flex-column justify-content-center" bind:this={postContainer}>
     <div class="pb-5">
     {#await post}
@@ -57,4 +55,3 @@ async function getPost(id) {
     {/await}
     </div>
   </div>
-</Container>

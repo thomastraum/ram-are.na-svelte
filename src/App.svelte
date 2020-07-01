@@ -64,12 +64,23 @@
 	    </div>
 	</header>
 
+<div class="container">
 	<Router url="{url}">
-	  <div>
 	    <Route path="/about" component="{About}" />
 	    <Route path="/" component="{Posts}" />
 			<Route path="/post/:id" component="{Post}" />
-	  </div>
 	</Router>
+</div>
+
+<footer class="container pt-5 mt-5 pb-2 mb-2">
+  <div class="row">
+    <div class="col-3 col-md">
+      <h5>TRAUM INC</h5>
+    </div>
+    <div class="col-3 col-md">
+      <h5>Images + Technology</h5>
+    </div>
+  </div>
+</footer>
 
 </main>

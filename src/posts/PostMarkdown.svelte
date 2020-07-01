@@ -5,14 +5,8 @@ export let post;
 
 <style>
 
-.post-image {
-  /* float: left; */
-}
-
-.blockquote {
-
-}
-
 </style>
 
-{@html post.content_html}
+<div class="markdown-text">
+  {@html post.content_html}
+</div>

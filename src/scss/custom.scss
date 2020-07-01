@@ -3,4 +3,19 @@
 $link-color: black;
 $navbar-dark-color: black;
 $navbar-brand-font-size: 0.8rem;
+$enable-responsive-font-sizes: true;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 960px
+) !default;
+
+// $link-decoration:                         underline !default;
+
+.markdown-text a {
+  text-decoration: underline;
+}
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
