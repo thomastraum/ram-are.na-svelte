@@ -8,7 +8,8 @@ let tweetDiv;
 
 const initializeTwittr = () => {
   // "https://twitter.com/hundredrabbits/status/1270006618118209536"
-  const id = post.source.url.split('/').pop();
+  console.log("ur;",post.source.url.split('/').pop().split('?').shift());
+  const id = post.source.url.split('/').pop().split('?').shift();
   twttr.widgets.createTweet(
     id,
     tweetDiv,
