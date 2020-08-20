@@ -10,6 +10,7 @@ import PostImage        from './posts/PostImage.svelte';
 import PostMarkdown     from './posts/PostMarkdown.svelte';
 import PostMedia        from './posts/PostMedia.svelte';
 import PostLink         from './posts/PostLink.svelte';
+import PostTwitter      from './posts/PostTwitter.svelte';
 
 // const channelslug = "random-access-memory";
 const channelslug = "blog-eqyzzcqjsfe";
@@ -68,7 +69,11 @@ nextPage();
     {:else if post.class == "Media" }
       <PostMedia {post} />
     {:else if post.class == "Link" }
-      <PostLink {post} />
+      {#if post.source.provider.name == "Twitter"}
+        <PostTwitter {post} />      
+      {:else}
+        <PostLink {post} />
+      {/if}
     {:else}
       {@html post.content_html}
     {/if}
